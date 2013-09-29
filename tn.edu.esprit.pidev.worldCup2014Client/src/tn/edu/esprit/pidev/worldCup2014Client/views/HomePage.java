@@ -15,6 +15,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class HomePage extends JFrame {
 
@@ -48,7 +50,7 @@ public class HomePage extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(HomePage.class.getResource("/tn/edu/esprit/pidev/worldCup2014Client/ressources/Icon.124609.png")));
 		setTitle("Home Page  WorldCup2014");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 762, 476);
+		setBounds(100, 100, 788, 476);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -57,21 +59,65 @@ public class HomePage extends JFrame {
 		menuBar.add(mnMenu);
 		
 		JMenuItem mntmAddNewUser = new JMenuItem("Add New User");
+		mntmAddNewUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddUserPage ajout;
+				ajout= new AddUserPage();
+				ajout.setVisible(true);
+				
+			}
+		});
 		mnMenu.add(mntmAddNewUser);
 		
 		JMenuItem mntmRemoveUser = new JMenuItem("Remove User");
+		mntmRemoveUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DeleteUserPage supp;
+				supp=new  DeleteUserPage();
+				supp.setVisible(true);
+				
+			}
+		});
 		mnMenu.add(mntmRemoveUser);
 		
 		JMenuItem mntmViewsAllUser = new JMenuItem("Views all User");
+		
+		mntmViewsAllUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GetAllUserPage liste;
+				liste= new GetAllUserPage();
+				liste.setVisible(true);
+				
+			}
+		});
+		
 		mnMenu.add(mntmViewsAllUser);
 		
-		JMenuItem mntmViewsUserBytype = new JMenuItem("Views User ByType");
-		mnMenu.add(mntmViewsUserBytype);
 		
-		JMenuItem mntmViewsUserBy = new JMenuItem("Views User by Id");
-		mnMenu.add(mntmViewsUserBy);
+	JMenuItem mntmViewsAllUser_1 = new JMenuItem("Views all User by type");
+		
+		mntmViewsAllUser_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GetUserByType listep;
+				listep= new GetUserByType();
+				listep.setVisible(true);
+				
+			}
+		});
+		
+		mnMenu.add(mntmViewsAllUser_1);
 		
 		JMenuItem mntmUpdateUserProfile = new JMenuItem("Update User Profile");
+		mntmUpdateUserProfile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UpdateUserPage modifier;
+				modifier= new UpdateUserPage();
+				modifier.setVisible(true);
+				
+			}
+		});
+		
+		
 		mnMenu.add(mntmUpdateUserProfile);
 		
 		JMenu mnAbout = new JMenu("About");
@@ -83,7 +129,7 @@ public class HomePage extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblNewLabel = new JLabel("New label");
+		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(HomePage.class.getResource("/tn/edu/esprit/pidev/worldCup2014Client/ressources/img51756b4d82141.jpg")));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
