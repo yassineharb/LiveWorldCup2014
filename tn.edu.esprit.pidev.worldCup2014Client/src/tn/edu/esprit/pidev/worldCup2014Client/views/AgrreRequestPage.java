@@ -23,6 +23,8 @@ import tn.edu.esprit.pidev.worldCup2014.services.interfaces.UserCrudServicesRemo
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.List;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JTextField;
 
 public class AgrreRequestPage extends JFrame {
 
@@ -30,6 +32,10 @@ public class AgrreRequestPage extends JFrame {
 	DefaultTableModel dft;
 	private JPanel contentPane;
 	private JTable table;
+	private JButton btnAccepteRequest;
+	private JButton btnAcceptRequest;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -112,33 +118,100 @@ public class AgrreRequestPage extends JFrame {
 			     
 			    }
 			
-			
+
 			
 		});
 		
 		
 		
 		table = new JTable();
+		
+		btnAccepteRequest = new JButton("Select  request");
+		btnAccepteRequest.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int n =table.getSelectedRow();
+				
+				
+				int cin = (Integer) table.getValueAt(n, 0);
+				String nom =(String) table.getValueAt(n, 1);
+				textField.setText(nom);
+				textField_1.setText(cin+"");
+				
+			
+				
+			}
+		});
+		
+		btnAcceptRequest = new JButton("Accept request");
+		btnAcceptRequest.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Context context = new InitialContext();
+					 UserCrudServicesRemote proxy = 
+							 (UserCrudServicesRemote) context.lookup("ejb:/tn.edu.esprit.pidev.worldCup2014/UserCrudServices!tn.edu.esprit.pidev.worldCup2014.services.interfaces.UserCrudServicesRemote");
+					
+					
+					 UserWorldCup userWorldCupFound=proxy.FindUserByCin(Integer.parseInt(textField_1.getText())) ;
+					userWorldCupFound.setTypeUser(2);
+					
+					proxy.updateUser(userWorldCupFound);
+					
+				} catch (NamingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+				
+				
+				
+				
+			}
+		});
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(311, Short.MAX_VALUE)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(30)
+					.addComponent(btnAccepteRequest)
+					.addPreferredGap(ComponentPlacement.RELATED, 374, Short.MAX_VALUE)
 					.addComponent(btnNewButton)
 					.addGap(24))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(52)
+					.addGap(96)
+					.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(78)
+					.addComponent(btnAcceptRequest)
+					.addGap(57))
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addGap(41)
 					.addComponent(table, GroupLayout.PREFERRED_SIZE, 528, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(60, Short.MAX_VALUE))
+					.addContainerGap(71, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(32)
-					.addComponent(btnNewButton)
-					.addGap(104)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnNewButton)
+						.addComponent(btnAccepteRequest))
+					.addGap(35)
 					.addComponent(table, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(76, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnAcceptRequest)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(59))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
