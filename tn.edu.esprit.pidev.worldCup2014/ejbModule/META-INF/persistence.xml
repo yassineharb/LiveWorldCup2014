@@ -3,6 +3,7 @@
 	<persistence-unit name="tn.edu.esprit.pidev.worldCup2014">
 	<jta-data-source>java:/worldcupDS</jta-data-source>
 		<class>tn.edu.esprit.pidev.worldCup2014.domain.UserWorldCup</class>
+		<class>tn.edu.esprit.pidev.worldCup2014.domain.RequestJournaliste</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>

@@ -25,6 +25,7 @@ public class UserWorldCup implements Serializable {
 	private String email;
 	private String country;
 	private boolean validate;
+	private RequestJournaliste requestJournaliste;
 
 
  
@@ -91,6 +92,16 @@ public class UserWorldCup implements Serializable {
 
 	public void setValidate(boolean validate) {
 		this.validate = validate;
+	}
+	
+	@OneToOne 
+
+	public RequestJournaliste getRequestJournaliste() {
+		return requestJournaliste;
+	}
+
+	public void setRequestJournaliste(RequestJournaliste requestJournaliste) {
+		this.requestJournaliste = requestJournaliste;
 	}
    
 }
