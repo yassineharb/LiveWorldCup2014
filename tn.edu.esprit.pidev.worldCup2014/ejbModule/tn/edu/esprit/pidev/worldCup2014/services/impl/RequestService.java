@@ -1,8 +1,11 @@
 package tn.edu.esprit.pidev.worldCup2014.services.impl;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import tn.edu.esprit.pidev.worldCup2014.domain.RequestJournaliste;
 import tn.edu.esprit.pidev.worldCup2014.domain.UserWorldCup;
@@ -28,6 +31,14 @@ public class RequestService implements RequestServiceRemote,
 		entityManager.persist(requestJournaliste);
 
 		
+	}
+
+
+	@Override
+	public List<RequestJournaliste> findAllRequest() {
+		String jpql = "select e from RequestJournaliste e";
+		 Query query = entityManager.createQuery(jpql);
+		return query.getResultList();
 	}
 
 	
